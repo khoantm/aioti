@@ -166,6 +166,15 @@ section{padding:80px 0}
     linear-gradient(180deg,var(--ink-2),var(--ink))}
 .works .head h2{color:#fff}
 .works .head p{color:var(--soft-2)}
+/* thanh lọc theo ngành — chỉ hiện khi có đủ ảnh ở từ 2 ngành trở lên */
+.filt{display:flex;flex-wrap:wrap;gap:8px;margin:-16px 0 26px}
+.filt button{border:1.5px solid rgba(255,255,255,.22);background:transparent;color:var(--soft-2);
+  border-radius:22px;padding:8px 18px;font-family:'Be Vietnam Pro';font-weight:600;font-size:14px;
+  cursor:pointer;transition:.15s}
+.filt button:hover{border-color:var(--sun);color:var(--sun-lt)}
+.filt button.on{background:var(--sun);border-color:var(--sun);color:var(--on-sun)}
+.filt button i{font-style:normal;opacity:.62;margin-left:5px;font-family:'IBM Plex Mono';font-size:12px}
+.shot.off{display:none}
 .grid-shots{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
 .shot{position:relative;padding:0;border:1px solid var(--line-d);border-radius:6px;
   overflow:hidden;background:var(--ink-2);cursor:pointer;display:block;line-height:0;
@@ -299,6 +308,8 @@ footer{background:linear-gradient(180deg,var(--ink),var(--ink-3));color:var(--so
   .svc-in,.svcs-row,.vows,.res,.ft{grid-template-columns:1fr}
   .svc-pic{min-height:200px;order:-1}
   .grid-shots{grid-template-columns:repeat(2,1fr);gap:10px}
+  .filt{margin:-8px 0 20px}
+  .filt button{padding:7px 14px;font-size:13px}
   .shot img{height:132px}
   .shot-cap{font-size:11px;padding:18px 8px 7px}
   .vows{gap:0}
@@ -385,14 +396,14 @@ footer{background:linear-gradient(180deg,var(--ink),var(--ink-3));color:var(--so
 <g stroke="#fff" stroke-width="1.7" stroke-linecap="round">
 <path d="M11.7 31h40.6M25.6 20l-4 22M38.4 20l4 22"/></g>
 <path d="M32 42v8M22 50h20" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-</svg><img src="anh/t-01.jpg" alt="Điện mặt trời" loading="lazy"></div>
+</svg><img src="anh/t-01.jpg" alt="Dàn pin mặt trời hoàn thiện trên mái bê tông" loading="lazy"></div>
         </div>
       </article>
 
       <div class="svcs-row">
         <article class="svc small rv">
           <div class="svc-in">
-            <div class="svc-pic"><span class="rank">ƯU TIÊN 02</span><img class="ico" src="data:image/png;base64,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" alt="" aria-hidden="true"><img src="anh/t-01.jpg" alt="Camera an ninh" loading="lazy"></div>
+            <div class="svc-pic"><span class="rank">ƯU TIÊN 02</span><img class="ico" src="data:image/png;base64,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" alt="" aria-hidden="true"><img src="anh/t-15.jpg" alt="Camera PTZ giám sát khu vực mái" loading="lazy"></div>
             <div class="svc-txt">
               <span class="sub">Mảng chủ lực</span>
               <h3>Camera an ninh</h3>
@@ -416,7 +427,7 @@ footer{background:linear-gradient(180deg,var(--ink),var(--ink-3));color:var(--so
 <g stroke="#fff" stroke-width="2.2" stroke-linecap="round">
 <path d="M22.6 19.6a10.6 10.6 0 0 1 14.8 0M26.8 24.2a5 5 0 0 1 6.4 0"/></g>
 <circle cx="30" cy="28.4" r="1.9" fill="#fff"/>
-</svg><img src="anh/t-01.jpg" alt="Nhà thông minh" loading="lazy"></div>
+</svg><img src="anh/t-09.jpg" alt="Hệ thống thiết bị điện và lưu trữ lắp đặt hoàn thiện" loading="lazy"></div>
             <div class="svc-txt">
               <span class="sub">Mảng bổ trợ</span>
               <h3>Nhà thông minh</h3>
@@ -443,210 +454,71 @@ footer{background:linear-gradient(180deg,var(--ink),var(--ink-3));color:var(--so
       <h2>Ảnh thật, chụp tại công trình AIOTI đã làm</h2>
       <p>Không phải ảnh minh họa lấy trên mạng. Bấm vào từng ảnh để xem lớn và đọc chi tiết kỹ thuật.</p>
     </div>
+    <div class="filt" id="filt" hidden></div>
     <div class="grid-shots">
-      <button class="shot rv" data-i="0" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-01.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="0" data-cat="solar" aria-label="Biệt thự — dàn pin lắp trên mái, không phá vỡ kiến trúc mặt tiền">
+        <img src="anh/t-01.jpg" alt="Biệt thự — dàn pin lắp trên mái, không phá vỡ kiến trúc mặt tiền" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Biệt thự — dàn pin lắp trên mái, không phá vỡ kiến trúc mặt tiền</span>
       </button>
-      <button class="shot rv" data-i="1" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-02.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="1" data-cat="solar" aria-label="Dàn pin hoàn thiện trên mái bê tông, có camera giám sát riêng cho khu vực mái">
+        <img src="anh/t-02.jpg" alt="Dàn pin hoàn thiện trên mái bê tông, có camera giám sát riêng cho khu vực mái" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Dàn pin hoàn thiện trên mái bê tông, có camera giám sát riêng cho khu vực mái</span>
       </button>
-      <button class="shot rv" data-i="2" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-03.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="2" data-cat="solar" aria-label="Hai dãy pin bố trí song song, chừa lối đi giữa để vệ sinh và bảo trì">
+        <img src="anh/t-03.jpg" alt="Hai dãy pin bố trí song song, chừa lối đi giữa để vệ sinh và bảo trì" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Hai dãy pin bố trí song song, chừa lối đi giữa để vệ sinh và bảo trì</span>
       </button>
-      <button class="shot rv" data-i="3" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-04.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="3" data-cat="solar" aria-label="Lối đi giữa hai dãy pin và máng thoát nước — thiết kế để mái không đọng nước">
+        <img src="anh/t-04.jpg" alt="Lối đi giữa hai dãy pin và máng thoát nước — thiết kế để mái không đọng nước" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Lối đi giữa hai dãy pin và máng thoát nước — thiết kế để mái không đọng nước</span>
       </button>
-      <button class="shot rv" data-i="4" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-05.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="4" data-cat="solar" aria-label="Khung nâng cao vừa phát điện vừa che nắng cho sân thượng">
+        <img src="anh/t-05.jpg" alt="Khung nâng cao vừa phát điện vừa che nắng cho sân thượng" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Khung nâng cao vừa phát điện vừa che nắng cho sân thượng</span>
       </button>
-      <button class="shot rv" data-i="5" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-06.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="5" data-cat="solar" aria-label="Kết cấu thép mạ kẽm nhúng nóng, giằng chéo chống lật khi gió lớn">
+        <img src="anh/t-06.jpg" alt="Kết cấu thép mạ kẽm nhúng nóng, giằng chéo chống lật khi gió lớn" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Kết cấu thép mạ kẽm nhúng nóng, giằng chéo chống lật khi gió lớn</span>
       </button>
-      <button class="shot rv" data-i="6" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-07.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="6" data-cat="solar" aria-label="Khung giá đỡ dựng xong trước khi lắp pin — chân đế xử lý chống thấm tại điểm khoan">
+        <img src="anh/t-07.jpg" alt="Khung giá đỡ dựng xong trước khi lắp pin — chân đế xử lý chống thấm tại điểm khoan" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Khung giá đỡ dựng xong trước khi lắp pin — chân đế xử lý chống thấm tại điểm khoan</span>
       </button>
-      <button class="shot rv" data-i="7" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-08.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="7" data-cat="solar" aria-label="Nhìn từ đường: dàn pin nằm gọn sau mái đua, khuất tầm nhìn mặt tiền">
+        <img src="anh/t-08.jpg" alt="Nhìn từ đường: dàn pin nằm gọn sau mái đua, khuất tầm nhìn mặt tiền" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Nhìn từ đường: dàn pin nằm gọn sau mái đua, khuất tầm nhìn mặt tiền</span>
       </button>
-      <button class="shot rv" data-i="8" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-09.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="8" data-cat="solar" aria-label="Hệ hybrid có lưu trữ: inverter, tủ điện và ba module pin 16,08 kWh">
+        <img src="anh/t-09.jpg" alt="Hệ hybrid có lưu trữ: inverter, tủ điện và ba module pin 16,08 kWh" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Hệ hybrid có lưu trữ: inverter, tủ điện và ba module pin 16,08 kWh</span>
       </button>
-      <button class="shot rv" data-i="9" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-10.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="9" data-cat="solar" aria-label="Tủ điện dán nhãn từng aptomat — EVN, BACKUP, LOAD, SPD, CB PV1, CB PV2">
+        <img src="anh/t-10.jpg" alt="Tủ điện dán nhãn từng aptomat — EVN, BACKUP, LOAD, SPD, CB PV1, CB PV2" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Tủ điện dán nhãn từng aptomat — EVN, BACKUP, LOAD, SPD, CB PV1, CB PV2</span>
       </button>
-      <button class="shot rv" data-i="10" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-11.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="10" data-cat="solar" aria-label="Pin lưu trữ lithium, đèn báo trạng thái sạc nhìn thấy từ xa">
+        <img src="anh/t-11.jpg" alt="Pin lưu trữ lithium, đèn báo trạng thái sạc nhìn thấy từ xa" loading="lazy" width="700" height="933">
+        <span class="shot-cap">Pin lưu trữ lithium, đèn báo trạng thái sạc nhìn thấy từ xa</span>
       </button>
-      <button class="shot rv" data-i="11" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-12.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="11" data-cat="solar" aria-label="Inverter lắp ngoài trời, chọn vị trí thoáng gió để tản nhiệt">
+        <img src="anh/t-12.jpg" alt="Inverter lắp ngoài trời, chọn vị trí thoáng gió để tản nhiệt" loading="lazy" width="700" height="933">
+        <span class="shot-cap">Inverter lắp ngoài trời, chọn vị trí thoáng gió để tản nhiệt</span>
       </button>
-      <button class="shot rv" data-i="12" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-13.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="12" data-cat="solar" aria-label="Hộp cách ly DC chuẩn IP67 — ngắt được nguồn một chiều từ pin khi cần sửa chữa">
+        <img src="anh/t-13.jpg" alt="Hộp cách ly DC chuẩn IP67 — ngắt được nguồn một chiều từ pin khi cần sửa chữa" loading="lazy" width="700" height="933">
+        <span class="shot-cap">Hộp cách ly DC chuẩn IP67 — ngắt được nguồn một chiều từ pin khi cần sửa chữa</span>
       </button>
-      <button class="shot rv" data-i="13" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-14.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="13" data-cat="solar" aria-label="Cẩu pin lưu trữ vào công trình bằng xe cẩu chuyên dụng">
+        <img src="anh/t-14.jpg" alt="Cẩu pin lưu trữ vào công trình bằng xe cẩu chuyên dụng" loading="lazy" width="700" height="525">
+        <span class="shot-cap">Cẩu pin lưu trữ vào công trình bằng xe cẩu chuyên dụng</span>
       </button>
-      <button class="shot rv" data-i="14" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-15.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="14" data-cat="camera" aria-label="Camera PTZ giám sát dàn pin ban ngày, phát hiện sớm hư hỏng hoặc vật lạ">
+        <img src="anh/t-15.jpg" alt="Camera PTZ giám sát dàn pin ban ngày, phát hiện sớm hư hỏng hoặc vật lạ" loading="lazy" width="700" height="394">
+        <span class="shot-cap">Camera PTZ giám sát dàn pin ban ngày, phát hiện sớm hư hỏng hoặc vật lạ</span>
       </button>
-      <button class="shot rv" data-i="15" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-16.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="16" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-17.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="17" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-18.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="18" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-19.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="19" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-20.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="20" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-21.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="21" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-22.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="22" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-23.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="23" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-24.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="24" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-25.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="25" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-26.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="26" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-27.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="27" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-28.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="28" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-29.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="29" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-30.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="30" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-31.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="31" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-32.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="32" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-33.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="33" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-34.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="34" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-35.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="35" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-36.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="36" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-37.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="37" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-38.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="38" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-39.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="39" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-40.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="40" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-41.jpg" alt="Camera an ninh" loading="lazy" width="700" height="933">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="41" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-42.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="42" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-43.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="43" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-44.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="44" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-45.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="45" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-46.jpg" alt="Camera an ninh" loading="lazy" width="700" height="525">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="46" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-47.jpg" alt="Camera an ninh" loading="lazy" width="700" height="394">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="47" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-48.jpg" alt="Camera an ninh" loading="lazy" width="700" height="394">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="48" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-49.jpg" alt="Camera an ninh" loading="lazy" width="700" height="394">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="49" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-50.jpg" alt="Camera an ninh" loading="lazy" width="700" height="394">
-        <span class="shot-cap">Camera an ninh</span>
-      </button>
-      <button class="shot rv" data-i="50" data-cat="camera" aria-label="Camera an ninh">
-        <img src="anh/t-51.jpg" alt="Camera an ninh" loading="lazy" width="700" height="394">
-        <span class="shot-cap">Camera an ninh</span>
+      <button class="shot rv" data-i="15" data-cat="camera" aria-label="Cùng camera đó vào ban đêm — vẫn quan sát rõ toàn bộ khu vực mái">
+        <img src="anh/t-16.jpg" alt="Cùng camera đó vào ban đêm — vẫn quan sát rõ toàn bộ khu vực mái" loading="lazy" width="700" height="394">
+        <span class="shot-cap">Cùng camera đó vào ban đêm — vẫn quan sát rõ toàn bộ khu vực mái</span>
       </button>
     </div>
     <p class="works-note rv">Cần xem thêm ảnh của một loại công trình cụ thể — nhà phố, biệt thự hay nhà xưởng — gọi hotline, AIOTI gửi ngay qua Zalo.</p>
@@ -830,22 +702,53 @@ tinh();
 
 
 /* ===== XEM ẢNH ===== */
-const SHOTS=[["01","Camera an ninh"],["02","Camera an ninh"],["03","Camera an ninh"],["04","Camera an ninh"],["05","Camera an ninh"],["06","Camera an ninh"],["07","Camera an ninh"],["08","Camera an ninh"],["09","Camera an ninh"],["10","Camera an ninh"],["11","Camera an ninh"],["12","Camera an ninh"],["13","Camera an ninh"],["14","Camera an ninh"],["15","Camera an ninh"],["16","Camera an ninh"],["17","Camera an ninh"],["18","Camera an ninh"],["19","Camera an ninh"],["20","Camera an ninh"],["21","Camera an ninh"],["22","Camera an ninh"],["23","Camera an ninh"],["24","Camera an ninh"],["25","Camera an ninh"],["26","Camera an ninh"],["27","Camera an ninh"],["28","Camera an ninh"],["29","Camera an ninh"],["30","Camera an ninh"],["31","Camera an ninh"],["32","Camera an ninh"],["33","Camera an ninh"],["34","Camera an ninh"],["35","Camera an ninh"],["36","Camera an ninh"],["37","Camera an ninh"],["38","Camera an ninh"],["39","Camera an ninh"],["40","Camera an ninh"],["41","Camera an ninh"],["42","Camera an ninh"],["43","Camera an ninh"],["44","Camera an ninh"],["45","Camera an ninh"],["46","Camera an ninh"],["47","Camera an ninh"],["48","Camera an ninh"],["49","Camera an ninh"],["50","Camera an ninh"],["51","Camera an ninh"]];
+const SHOTS=[["01", "Biệt thự — dàn pin lắp trên mái, không phá vỡ kiến trúc mặt tiền"], ["02", "Dàn pin hoàn thiện trên mái bê tông, có camera giám sát riêng cho khu vực mái"], ["03", "Hai dãy pin bố trí song song, chừa lối đi giữa để vệ sinh và bảo trì"], ["04", "Lối đi giữa hai dãy pin và máng thoát nước — thiết kế để mái không đọng nước"], ["05", "Khung nâng cao vừa phát điện vừa che nắng cho sân thượng"], ["06", "Kết cấu thép mạ kẽm nhúng nóng, giằng chéo chống lật khi gió lớn"], ["07", "Khung giá đỡ dựng xong trước khi lắp pin — chân đế xử lý chống thấm tại điểm khoan"], ["08", "Nhìn từ đường: dàn pin nằm gọn sau mái đua, khuất tầm nhìn mặt tiền"], ["09", "Hệ hybrid có lưu trữ: inverter, tủ điện và ba module pin 16,08 kWh"], ["10", "Tủ điện dán nhãn từng aptomat — EVN, BACKUP, LOAD, SPD, CB PV1, CB PV2"], ["11", "Pin lưu trữ lithium, đèn báo trạng thái sạc nhìn thấy từ xa"], ["12", "Inverter lắp ngoài trời, chọn vị trí thoáng gió để tản nhiệt"], ["13", "Hộp cách ly DC chuẩn IP67 — ngắt được nguồn một chiều từ pin khi cần sửa chữa"], ["14", "Cẩu pin lưu trữ vào công trình bằng xe cẩu chuyên dụng"], ["15", "Camera PTZ giám sát dàn pin ban ngày, phát hiện sớm hư hỏng hoặc vật lạ"], ["16", "Cùng camera đó vào ban đêm — vẫn quan sát rõ toàn bộ khu vực mái"]];
 const lb=document.getElementById("lb"),lbImg=document.getElementById("lbImg"),
       lbCap=document.getElementById("lbCap"),lbNum=document.getElementById("lbNum");
-let cur=0;
-function show(i){cur=(i+SHOTS.length)%SHOTS.length;const s=SHOTS[cur];
-  lbImg.src="anh/ct-"+s[0]+".jpg";lbImg.alt=s[1];lbCap.textContent=s[1];
-  lbNum.textContent=("0"+(cur+1)).slice(-2)+" / "+SHOTS.length;}
-function openLb(i){show(i);lb.classList.add("on");document.body.style.overflow="hidden";}
+const TILES=[...document.querySelectorAll(".shot")];
+let view=TILES.map((_,i)=>i), pos=0;
+
+/* --- thanh lọc: chỉ dựng khi từ 2 ngành trở lên có ít nhất 3 ảnh --- */
+(function(){
+  const NAME={solar:"Điện mặt trời",camera:"Camera an ninh",smart:"Nhà thông minh"};
+  const cnt={};
+  TILES.forEach(t=>{const c=t.dataset.cat||"solar";cnt[c]=(cnt[c]||0)+1;});
+  const big=Object.keys(NAME).filter(c=>(cnt[c]||0)>=3);
+  if(big.length<2) return;
+  const bar=document.getElementById("filt");
+  bar.hidden=false;
+  bar.innerHTML='<button class="on" data-c="all">Tất cả<i>'+TILES.length+'</i></button>'+
+    big.map(c=>`<button data-c="${c}">${NAME[c]}<i>${cnt[c]}</i></button>`).join("");
+  bar.addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return;
+    const c=b.dataset.c;
+    bar.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));
+    view=[];
+    TILES.forEach((t,i)=>{
+      const ok = c==="all" || (t.dataset.cat||"solar")===c;
+      t.classList.toggle("off",!ok);
+      if(ok) view.push(i);
+    });
+  });
+})();
+
+function show(p){
+  if(!view.length) return;
+  pos=(p+view.length)%view.length;
+  const s=SHOTS[view[pos]];
+  lbImg.src="anh/ct-"+s[0]+".jpg"; lbImg.alt=s[1]; lbCap.textContent=s[1];
+  lbNum.textContent=("0"+(pos+1)).slice(-2)+" / "+view.length;
+}
+function openLb(i){const p=view.indexOf(i); if(p<0)return; show(p);
+  lb.classList.add("on"); document.body.style.overflow="hidden";}
 function closeLb(){lb.classList.remove("on");document.body.style.overflow="";}
-document.querySelectorAll(".shot").forEach(b=>b.addEventListener("click",()=>openLb(+b.dataset.i)));
+TILES.forEach(b=>b.addEventListener("click",()=>openLb(+b.dataset.i)));
 document.getElementById("lbX").addEventListener("click",closeLb);
-document.getElementById("lbP").addEventListener("click",e=>{e.stopPropagation();show(cur-1)});
-document.getElementById("lbN").addEventListener("click",e=>{e.stopPropagation();show(cur+1)});
+document.getElementById("lbP").addEventListener("click",e=>{e.stopPropagation();show(pos-1)});
+document.getElementById("lbN").addEventListener("click",e=>{e.stopPropagation();show(pos+1)});
 lb.addEventListener("click",e=>{if(e.target===lb)closeLb();});
 document.addEventListener("keydown",e=>{if(!lb.classList.contains("on"))return;
-  if(e.key==="Escape")closeLb(); if(e.key==="ArrowLeft")show(cur-1); if(e.key==="ArrowRight")show(cur+1);});
+  if(e.key==="Escape")closeLb(); if(e.key==="ArrowLeft")show(pos-1); if(e.key==="ArrowRight")show(pos+1);});
 
 const topBtn=document.getElementById("topBtn");
 topBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
